@@ -15,17 +15,27 @@ RUN docker-php-ext-install pdo mysqli pdo_mysql
 #install composer
 #RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/ --filename=composer
 
+# Use the default production configuration
+RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
+
+# Configure apache
+RUN sed -i '/<Directory \/var\/www\/>/,/<\/Directory>/ s/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf \
+    && a2enmod rewrite
+
+
+
+
 #set our application folder as an environment variable
 ENV APP_HOME /var/www/html
 
 #change uid and gid of apache to docker user uid/gid
-RUN usermod -u 1000 www-data && groupmod -g 1000 www-data
+# RUN usermod -u 1000 www-data && groupmod -g 1000 www-data
 
 #change the web_root to laravel /var/www/html/public folder
 #RUN sed -i -e "s/html/html\/public/g" /etc/apache2/sites-enabled/000-default.conf
 
 # enable apache module rewrite
-RUN a2enmod rewrite
+#RUN a2enmod rewrite
 
 #copy source files and run composer
 COPY . $APP_HOME
@@ -34,7 +44,7 @@ COPY . $APP_HOME
 #RUN composer install --no-interaction
 
 #change ownership of our applications
-RUN chown -R www-data:www-data $APP_HOME
+#RUN chown -R www-data:www-data $APP_HOME
 
 #update apache port at runtime for Heroku
 ENTRYPOINT []
