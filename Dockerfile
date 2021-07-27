@@ -24,7 +24,7 @@ ENV APP_HOME /var/www/html
 RUN usermod -u 1000 www-data && groupmod -g 1000 www-data
 
 #copy source files
-COPY COPY index.html info.php $APP_HOME
+COPY index.html info.php $APP_HOME
 
 #install composer
 #RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/ --filename=composer
