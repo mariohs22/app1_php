@@ -1,4 +1,7 @@
 {
+	"name": "mario-devops-exam/app1-php",
+	"description": "Simple PHP `Hello World` projects with CI/CD to Heroku via GitHub Actions, also performing static analysis and unit tests",
+
     "require-dev": {
         "ext-curl": "*",
 		"ext-dom": "*",
