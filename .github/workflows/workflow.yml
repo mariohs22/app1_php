@@ -42,6 +42,14 @@ jobs:
           configuration: test/phpunit.xml
           args: --coverage-text
 
+      - name: The job has failure
+        if: ${{ failure() }}
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          args: App1_php test job has fail.
+
   build-deploy:
     needs: test
     runs-on: ubuntu-latest
