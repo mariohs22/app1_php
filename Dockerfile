@@ -53,4 +53,5 @@ ENTRYPOINT []
 #CMD sed -i "s/VirtualHost \*:80/VirtualHost \*:${PORT:-80}/g" /etc/apache2/sites-available/000-default.conf
 
 COPY run-apache2.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/run-apache2.sh
 CMD [ "run-apache2.sh" ]
