@@ -18,40 +18,27 @@ RUN docker-php-ext-install pdo mysqli pdo_mysql
 # Use the default production configuration
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 
-# Configure apache
+# Configure apache & enable apache module rewrite
 RUN sed -i '/<Directory \/var\/www\/>/,/<\/Directory>/ s/AllowOverride None/AllowOverride All/' /etc/apache2/apache2.conf \
     && a2enmod rewrite
-
-
-
 
 #set our application folder as an environment variable
 ENV APP_HOME /var/www/html
 
 #change uid and gid of apache to docker user uid/gid
-# RUN usermod -u 1000 www-data && groupmod -g 1000 www-data
+RUN usermod -u 1000 www-data && groupmod -g 1000 www-data
 
-#change the web_root to laravel /var/www/html/public folder
-#RUN sed -i -e "s/html/html\/public/g" /etc/apache2/sites-enabled/000-default.conf
-
-# enable apache module rewrite
-#RUN a2enmod rewrite
-
-#copy source files and run composer
+#copy source files
 COPY . $APP_HOME
 
 # install all PHP dependencies
 #RUN composer install --no-interaction
 
 #change ownership of our applications
-#RUN chown -R www-data:www-data $APP_HOME
+RUN chown -R www-data:www-data $APP_HOME
 
 #update apache port at runtime for Heroku
 ENTRYPOINT []
-#CMD sed -i "s/80/$PORT/g" /etc/apache2/sites-enabled/000-default.conf /etc/apache2/ports.conf && docker-php-entrypoint apache2-foreground
-#CMD sed -i "s/Listen 80/Listen ${PORT:-80}/g" /etc/apache2/ports.conf /etc/apache2/apache2.conf
-#CMD sed -i "s/VirtualHost \*:80/VirtualHost \*:${PORT:-80}/g" /etc/apache2/sites-available/000-default.conf
-
 COPY run-apache2.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/run-apache2.sh
 CMD [ "run-apache2.sh" ]
