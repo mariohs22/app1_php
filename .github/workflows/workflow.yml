@@ -68,7 +68,7 @@ jobs:
         with:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
-          args: App1_php CI/CD job succeeded.
+          args: App1_php CI/CD job has succeeded.
 
       - name: The job has failure
         if: ${{ failure() }}
