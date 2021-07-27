@@ -21,10 +21,10 @@ RUN usermod -u 1000 www-data && groupmod -g 1000 www-data
 COPY app $APP_HOME
 
 #install composer
-#RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/ --filename=composer
+# RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/ --filename=composer
 
 # install all PHP dependencies
-#RUN composer install --no-interaction
+# RUN composer install --no-interaction
 
 #change ownership of our applications
 RUN chown -R www-data:www-data $APP_HOME
