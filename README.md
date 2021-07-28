@@ -1,6 +1,8 @@
+![CI/CD](https://github.com/mariohs22/app1_php/actions/workflows/workflow.yml/badge.svg?branch=main)
+
 # PHP Application (app1_php)
 
-This is repo for PHP application, created for [Andersen DevOps Course May-July`2021 exam](https://github.com/mariohs22/andersen-devops-course/tree/main/exam).
+This is PHP application repo, created for [Andersen DevOps Course May-July`2021 exam](https://github.com/mariohs22/andersen-devops-course/tree/main/exam).
 
 ## Description
 
@@ -36,15 +38,15 @@ You can see logs of every CI/CD job in [Actions](https://github.com/mariohs22/ap
 - 📁.github/workflow:
   `workflow.yml` - GitHub action CI/CD job file
 - 📁app:
-  `ClassExample.php` - example file for Greeter class
-  `Greeter.php` - example of PHP class Greeter
-  `index.html` - HTML template
+  `ClassExample.php` - example file for Greeter class;
+  `Greeter.php` - example of PHP class Greeter;
+  `index.html` - HTML template;
   `info.php` - shows `phpinfo()`
 - 📁diagram:
-  `app1.drawio` - CI/CD diagram of this app repo (.drawio version)
+  `app1.drawio` - CI/CD diagram of this app repo (.drawio version);
   `app1.png` - CI/CD diagram of this app repo (.png version)
 - 📁test:
-  `GreeterTest.php` - test file for Greeter class
+  `GreeterTest.php` - test file for Greeter class;
   `phpunit.xml` - PHPUnit test settings
 - `composer.json` - Composer PHP file
 - `Dockerfile` - Dockerfile for create docker container
